@@ -1,6 +1,8 @@
 package com.nelioalves.cursomc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.services.CategoriaService;
 
 @RestController
@@ -50,4 +53,15 @@ public class CategoriaResource {
 		
 		return ResponseEntity.noContent().build();
 	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		
+		// Convertendo uma lista do tipo Categoria para CategoriaDTO: manda a lista pro DTO e faz a conversão em um método próprio
+		List <Categoria> list = service.findAll();
+		List <CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDTO);
+	}
 }
+
