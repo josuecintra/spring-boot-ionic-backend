@@ -70,6 +70,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	// defaultValue é uma forma de deixar estes parâmetros opcionais c/ @RequestParam()
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 		@RequestParam(value = "page", defaultValue = "0") Integer page, 
