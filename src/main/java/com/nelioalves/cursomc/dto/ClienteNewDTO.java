@@ -2,11 +2,24 @@ package com.nelioalves.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import com.nelioalves.cursomc.services.valition.ClienteInsert;
+
+import org.hibernate.validator.constraints.Length;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String nome;
-	private String email;
+	@NotEmpty(message = "Preenchimento obrigatório") // @NotEmpty() só se aplica para string
+    @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
+    private String nome;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "E-mail inválido")
+    private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
@@ -30,7 +43,7 @@ public class ClienteNewDTO implements Serializable {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(final String nome) {
 		this.nome = nome;
 	}
 
@@ -38,7 +51,7 @@ public class ClienteNewDTO implements Serializable {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
@@ -46,7 +59,7 @@ public class ClienteNewDTO implements Serializable {
 		return cpfOuCnpj;
 	}
 
-	public void setCpfOuCnpj(String cpfOuCnpj) {
+	public void setCpfOuCnpj(final String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
@@ -54,7 +67,7 @@ public class ClienteNewDTO implements Serializable {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(final Integer tipo) {
 		this.tipo = tipo;
 	}
 
@@ -62,7 +75,7 @@ public class ClienteNewDTO implements Serializable {
 		return logradouro;
 	}
 
-	public void setLogradouro(String logradouro) {
+	public void setLogradouro(final String logradouro) {
 		this.logradouro = logradouro;
 	}
 
@@ -70,7 +83,7 @@ public class ClienteNewDTO implements Serializable {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(final String numero) {
 		this.numero = numero;
 	}
 
@@ -78,7 +91,7 @@ public class ClienteNewDTO implements Serializable {
 		return complemento;
 	}
 
-	public void setComplemento(String complemento) {
+	public void setComplemento(final String complemento) {
 		this.complemento = complemento;
 	}
 
@@ -86,7 +99,7 @@ public class ClienteNewDTO implements Serializable {
 		return bairro;
 	}
 
-	public void setBairro(String bairro) {
+	public void setBairro(final String bairro) {
 		this.bairro = bairro;
 	}
 
@@ -94,7 +107,7 @@ public class ClienteNewDTO implements Serializable {
 		return cep;
 	}
 
-	public void setCep(String cep) {
+	public void setCep(final String cep) {
 		this.cep = cep;
 	}
 
@@ -102,7 +115,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone1;
 	}
 
-	public void setTelefone1(String telefone1) {
+	public void setTelefone1(final String telefone1) {
 		this.telefone1 = telefone1;
 	}
 
@@ -110,7 +123,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone2;
 	}
 
-	public void setTelefone2(String telefone2) {
+	public void setTelefone2(final String telefone2) {
 		this.telefone2 = telefone2;
 	}
 
@@ -118,7 +131,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone3;
 	}
 
-	public void setTelefone3(String telefone3) {
+	public void setTelefone3(final String telefone3) {
 		this.telefone3 = telefone3;
 	}
 
@@ -126,7 +139,7 @@ public class ClienteNewDTO implements Serializable {
 		return cidadeId;
 	}
 
-	public void setCidadeId(Integer cidadeId) {
+	public void setCidadeId(final Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
 }
