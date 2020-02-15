@@ -33,6 +33,10 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+
 	// Inibindo chamadas recursivas (referencia ciclica, na qual A chama B e B chama A)
 	@JsonIgnore
 	public Pedido getPedido() {
