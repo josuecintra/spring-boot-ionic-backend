@@ -54,6 +54,7 @@ public class Pedido implements Serializable {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
+	// Todos os métodos com prefixo get*() tem como efeito a saída do nome do método sem o prefixo get como uma propriedade no JSON gerado
 	public double getValorTotal() {
 		double soma = 0;
 		for (ItemPedido ip : itens) {

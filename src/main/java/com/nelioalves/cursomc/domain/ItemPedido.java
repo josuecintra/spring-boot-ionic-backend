@@ -33,6 +33,7 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 
+	// Todos os métodos com prefixo get*() tem como efeito a saída do nome do método sem o prefixo get como uma propriedade no JSON gerado
 	public double getSubTotal() {
 		return (preco - desconto) * quantidade;
 	}
@@ -43,8 +44,18 @@ public class ItemPedido implements Serializable {
 		return id.getPedido();
 	}
 
+	// aula 50: foi necessário incluir este método set*() pois o framework (Jackson?) não utiliza o construtor com argumentos, ele utiliza o método set*()
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
+	
 	public Produto getProduto() {
 		return id.getProduto();
+	}
+
+	// aula 50: foi necessário incluir este método set*() pois o framework (Jackson?) não utiliza o construtor com argumentos, ele utiliza o método set*()
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
 	}
 
 	public ItemPedidoPK getId() {
