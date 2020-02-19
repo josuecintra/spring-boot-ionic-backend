@@ -3,6 +3,8 @@ package com.nelioalves.cursomc.config;
 import java.text.ParseException;
 
 import com.nelioalves.cursomc.services.DBService;
+import com.nelioalves.cursomc.services.EmailService;
+import com.nelioalves.cursomc.services.SmtpEmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,5 +31,10 @@ public class DevConfig {
         
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new SmtpEmailService();
     }
 }
