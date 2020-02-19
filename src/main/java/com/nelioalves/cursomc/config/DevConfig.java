@@ -33,13 +33,13 @@ public class DevConfig {
         return true;
     }
 
+    /**
+     * 61. MockEmailService com Logger. Padroes Strategy e Template Method (aos 12 min.)
+     * Usando a anotação @Bean, permite-nos a usar a injeção de dependência deste @Bean em outra classe.
+     * Quando ela for referenciada, o Spring Boot checará isto.
+     */
     @Bean
     public EmailService emailService() {
-        /**
-         * 61. MockEmailService com Logger. Padroes Strategy e Template Method (aos 12 min.)
-         * Usando a anotação @Bean, permite-nos a usar a injeção de dependência deste @Bean em outra classe.
-         * Quando ela for referenciada, o Spring Boot checará isto.
-         */
         return new SmtpEmailService();
     }
 }
