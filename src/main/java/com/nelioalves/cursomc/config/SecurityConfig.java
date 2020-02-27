@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // garantido que usuários não autenticados só acessem o médito GET
     private static final String[] PUBLIC_MATCHERS_GET = {
         "/produtos/**",
-        "/categorias/**"
+        "/categorias/**",
+        "/clientes/**"
     };
 
     @Override
