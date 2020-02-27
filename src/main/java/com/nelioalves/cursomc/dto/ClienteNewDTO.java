@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Preenchimento obrigatório") // @NotEmpty() só se aplica para string
     @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
@@ -23,6 +23,9 @@ public class ClienteNewDTO implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String senha;
+
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -43,7 +46,7 @@ public class ClienteNewDTO implements Serializable {
 		return nome;
 	}
 
-	public void setNome(final String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -51,7 +54,7 @@ public class ClienteNewDTO implements Serializable {
 		return email;
 	}
 
-	public void setEmail(final String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -59,7 +62,7 @@ public class ClienteNewDTO implements Serializable {
 		return cpfOuCnpj;
 	}
 
-	public void setCpfOuCnpj(final String cpfOuCnpj) {
+	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
@@ -67,7 +70,7 @@ public class ClienteNewDTO implements Serializable {
 		return tipo;
 	}
 
-	public void setTipo(final Integer tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
 
@@ -75,7 +78,7 @@ public class ClienteNewDTO implements Serializable {
 		return logradouro;
 	}
 
-	public void setLogradouro(final String logradouro) {
+	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
 
@@ -83,7 +86,7 @@ public class ClienteNewDTO implements Serializable {
 		return numero;
 	}
 
-	public void setNumero(final String numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -91,7 +94,7 @@ public class ClienteNewDTO implements Serializable {
 		return complemento;
 	}
 
-	public void setComplemento(final String complemento) {
+	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
 
@@ -99,7 +102,7 @@ public class ClienteNewDTO implements Serializable {
 		return bairro;
 	}
 
-	public void setBairro(final String bairro) {
+	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
 
@@ -107,7 +110,7 @@ public class ClienteNewDTO implements Serializable {
 		return cep;
 	}
 
-	public void setCep(final String cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
@@ -115,7 +118,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone1;
 	}
 
-	public void setTelefone1(final String telefone1) {
+	public void setTelefone1(String telefone1) {
 		this.telefone1 = telefone1;
 	}
 
@@ -123,7 +126,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone2;
 	}
 
-	public void setTelefone2(final String telefone2) {
+	public void setTelefone2(String telefone2) {
 		this.telefone2 = telefone2;
 	}
 
@@ -131,7 +134,7 @@ public class ClienteNewDTO implements Serializable {
 		return telefone3;
 	}
 
-	public void setTelefone3(final String telefone3) {
+	public void setTelefone3(String telefone3) {
 		this.telefone3 = telefone3;
 	}
 
@@ -139,7 +142,15 @@ public class ClienteNewDTO implements Serializable {
 		return cidadeId;
 	}
 
-	public void setCidadeId(final Integer cidadeId) {
+	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }
