@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,21 @@ import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.services.CategoriaService;
 
+/**
+ * "72. Autorizando endpoints para perfis específicos"
+ * Foi aplicado, neste projeto, a regra de negócios que só o Admin. possa fazer POST, PUT e DELETE de 
+ * CategoriasResouce(), ficando os demais resouces "a gosto do freguês", de acordo com sua regra de negócios.
+ * 
+ * A anotação @PreAuthorize("hasAnyRole('ADMIN')") DEVE vir antas das demais anotações
+ * 
+ * Ao final da aulta, fez mais algumas restrições no resource ClientesResouce(), restingindo as operações de 
+ * acordo com o perfil do usr logado.
+ * 
+ * No PedidoResource(), as operações apenas exigem que o cliente esteja logado para listar seus pedidos e fazer
+ * um novo pedido.
+ * 
+ * No ProdutosResource(), temos apenas endpoints GET e públicos.
+ */
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
@@ -36,6 +52,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
 		Categoria obj = service.fromDTO(objDto);
@@ -45,6 +62,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
 		Categoria obj =service.fromDTO(objDto);
@@ -53,6 +71,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);

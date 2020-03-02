@@ -3,6 +3,7 @@ package com.nelioalves.cursomc.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,21 @@ import com.nelioalves.cursomc.dto.ClienteDTO;
 import com.nelioalves.cursomc.dto.ClienteNewDTO;
 import com.nelioalves.cursomc.services.ClienteService;
 
+/**
+ * "72. Autorizando endpoints para perfis específicos"
+ * Foi aplicado, neste projeto, a regra de negócios que só o Admin. possa fazer POST, PUT e DELETE de 
+ * CategoriasResouce(), ficando os demais resouces "a gosto do freguês", de acordo com sua regra de negócios.
+ * 
+ * A anotação @PreAuthorize("hasAnyRole('ADMIN')") DEVE vir antas das demais anotações
+ * 
+ * Ao final da aulta, fez mais algumas restrições no resource ClientesResouce(), restingindo as operações de 
+ * acordo com o perfil do usr logado.
+ * 
+ * No PedidoResource(), as operações apenas exigem que o cliente esteja logado para listar seus pedidos e fazer
+ * um novo pedido.
+ * 
+ * No ProdutosResource(), temos apenas endpoints GET e públicos.
+ */
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
@@ -52,6 +68,7 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
@@ -59,6 +76,7 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		
@@ -69,6 +87,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 		@RequestParam(value = "page", defaultValue = "0") Integer page, 

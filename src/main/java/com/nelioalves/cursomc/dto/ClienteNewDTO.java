@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
-	private static long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@NotEmpty(message = "Preenchimento obrigatório") // @NotEmpty() só se aplica para string
     @Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
