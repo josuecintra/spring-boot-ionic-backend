@@ -23,12 +23,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private AuthenticationManager authenticationManager;
 
-    private JWTUtil jWTUtil;
+    private JWTUtil jwtUtil;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jWTUtil) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
         setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
         this.authenticationManager = authenticationManager;
-        this.jWTUtil = jWTUtil;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         
         // se a autenticação deu certo no método attempAuthentication(), o próximo passo será acrescentar o token e incluir na resposta da autenticação
         String username = ((UserSS) auth.getPrincipal()).getUsername();
-        String token = jWTUtil.generateToken(username);
+        String token = jwtUtil.generateToken(username);
         res.addHeader("Authorization", "Bearer " + token);
     }
 
