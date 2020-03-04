@@ -25,9 +25,9 @@ import com.nelioalves.cursomc.domain.enuns.TipoCliente;
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 
@@ -35,26 +35,30 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
+
 	@JsonIgnore
 	private String senha;
-	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // cascade na aula 41. Ajustando e testando a deleção de Cliente
+
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // cascade na aula 41. Ajustando e testando a deleção de
+																// Cliente
 	private List<Endereco> enderecos = new ArrayList<>();
-	
+
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
-	
-	// fetch = FetchType.EAGER garante que ao buscar um cliente no DB, faz com se busque também o perfil da pessoa juntos
+
+	// fetch = FetchType.EAGER garante que ao buscar um cliente no DB, faz com se
+	// busque também o perfil da pessoa juntos
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
+
+	private String imageUrl;
+
 	public Cliente() {
 		// Aula 68: adiciona o perfil Cliente para todas pessoas por default
 		addPerfil(Perfil.CLIENTE);
@@ -177,6 +181,12 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}	
 }
