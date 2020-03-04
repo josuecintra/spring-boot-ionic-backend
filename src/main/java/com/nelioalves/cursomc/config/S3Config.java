@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class S3Congig {
+public class S3Config {
 
     @Value("${aws.access_key_id}")
     private String awsId;
@@ -32,3 +32,6 @@ public class S3Congig {
     }
 }
 
+/**
+ * WIP Salvando primeiro arquivo no S3 (82); criação @Bean S3Service; usando properties; usou o CommandLineRunner() de CursoApplication() para testar uma classe de maneira simples e sem criar um endpoint
+ */
